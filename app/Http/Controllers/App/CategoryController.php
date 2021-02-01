@@ -10,7 +10,8 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $categories = Category::all();
+        $companyID = \Auth::user()->company_id;
+        $categories = Category::where('company_id', $companyID)->get();
         return view('app.category.index', compact('categories'));
     }
 
