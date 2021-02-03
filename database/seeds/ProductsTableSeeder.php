@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Database\Seeder;
 
@@ -12,7 +13,8 @@ class ProductsTableSeeder extends Seeder
      */
     public function run()
     {
-        $categories = \App\Models\Category::all();
+        \Tenant::setTenant(null);
+        $categories = Category::all();
         factory(Product::class, 100)
             ->make()
             ->each(function (Product $product) use ($categories) {
